@@ -1,0 +1,106 @@
+/* ResultCard.css */
+.result-card {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.result-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.result-name {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.result-meta {
+  font-size: .85rem;
+  color: var(--text-muted);
+  margin-top: .2rem;
+}
+
+.result-badge {
+  font-size: .9rem !important;
+  padding: .4rem 1rem !important;
+}
+
+/* Persentase meter */
+.result-meter {
+  margin-bottom: 1.25rem;
+}
+
+.meter-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: .875rem;
+  font-weight: 600;
+  margin-bottom: .5rem;
+  color: var(--text-muted);
+}
+
+.meter-pct {
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+.meter-track {
+  height: 12px;
+  background: var(--bg);
+  border-radius: 999px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.meter-fill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 1s ease;
+}
+
+/* Deskripsi */
+.result-desc {
+  font-size: .92rem;
+  line-height: 1.7;
+  color: var(--text);
+  padding: 1rem;
+  background: var(--surface2);
+  border-radius: var(--radius-sm);
+  border-left: 4px solid var(--primary);
+  margin-bottom: 1.25rem;
+}
+
+/* Tips */
+.result-tips h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: .75rem;
+}
+
+.result-tips ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.result-tips li {
+  display: flex;
+  align-items: flex-start;
+  gap: .6rem;
+  font-size: .9rem;
+  line-height: 1.55;
+}
+
+.tip-bullet {
+  color: var(--green);
+  font-weight: 800;
+  flex-shrink: 0;
+  margin-top: .05rem;
+}

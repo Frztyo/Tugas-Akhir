@@ -1,0 +1,85 @@
+name: CI/CD Deploy to EC2
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # ────────────────────────────────────────────────────────
+      # TAHAP CI: Checkout, Install, Build
+      # ────────────────────────────────────────────────────────
+      - name: Checkout kode
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: src/package-lock.json
+
+      - name: Catat waktu mulai CI
+        id: ci_start
+        run: echo "ci_start=$(date +%s)" >> $GITHUB_OUTPUT
+
+      - name: Install dependencies (tahap CI)
+        run: npm install --prefix src
+
+      - name: Build aplikasi React/Vite (tahap CI)
+        run: npm run build --prefix src
+
+      - name: Catat waktu selesai CI
+        id: ci_end
+        run: |
+          CI_START=${{ steps.ci_start.outputs.ci_start }}
+          CI_END=$(date +%s)
+          CI_DURATION=$((CI_END - CI_START))
+          echo "ci_duration=${CI_DURATION}" >> $GITHUB_OUTPUT
+          echo "✅ CI Build selesai dalam: ${CI_DURATION} detik"
+
+      # Buat file metadata commit untuk dikirim ke server
+      - name: Buat file metadata commit
+        run: |
+          echo "${{ github.sha }}" > .commit_sha
+          echo "${{ github.event.head_commit.message }}" > .commit_msg
+          echo "CI_DURATION=${{ steps.ci_end.outputs.ci_duration }}s" > .ci_info
+          echo "RUNNER=ubuntu-latest" >> .ci_info
+          echo "NODE_VERSION=20" >> .ci_info
+
+      # ────────────────────────────────────────────────────────
+      # TAHAP CD: Transfer ARTIFACT ke EC2 via SCP
+      # Hanya mengirim hasil build (src/dist/), scripts, dan metadata
+      # TIDAK mengirim node_modules atau source code mentah
+      # ────────────────────────────────────────────────────────
+      - name: Transfer artefak ke EC2 (SCP)
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          port: ${{ secrets.EC2_PORT }}
+          source: "src/dist/,scripts/,.commit_sha,.commit_msg,.ci_info"
+          target: "/home/ubuntu/app_new"
+
+      # ────────────────────────────────────────────────────────
+      # TAHAP CD: Eksekusi deployment di server EC2
+      # deploy.sh: backup → swap dist → reload nginx → health check → rollback jika gagal
+      # ────────────────────────────────────────────────────────
+      - name: Eksekusi skrip deployment via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          port: ${{ secrets.EC2_PORT }}
+          script: |
+            chmod +x /home/ubuntu/app_new/scripts/deploy.sh
+            chmod +x /home/ubuntu/app_new/scripts/healthcheck.sh
+            GITHUB_SHA="${{ github.sha }}" \
+            GITHUB_COMMIT_MSG="${{ github.event.head_commit.message }}" \
+            GITHUB_REF_NAME="${{ github.ref_name }}" \
+            /home/ubuntu/app_new/scripts/deploy.sh

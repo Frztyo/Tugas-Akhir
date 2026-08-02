@@ -1,0 +1,11 @@
+{
+  "name": "deploy-otomasi-ec2",
+  "version": "1.0.0",
+  "description": "Sistem Otomasi Deployment Minimal Downtime pada Amazon EC2 - React Frontend",
+  "private": true,
+  "scripts": {
+    "dev": "npm run dev --prefix src",
+    "build": "npm run build --prefix src",
+    "preview": "npm run preview --prefix src"
+  }
+}

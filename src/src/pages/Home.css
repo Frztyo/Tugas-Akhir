@@ -1,0 +1,268 @@
+/* Home.css — Halaman Landing */
+
+/* ── Hero ──────────────────────────────────────────────────────────── */
+.hero {
+  background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 40%, #0ea5e9 100%);
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 0;
+}
+
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 3rem;
+  padding-top: 4rem;
+  padding-bottom: 5rem;
+}
+
+.hero-chip {
+  display: inline-block;
+  background: rgba(255,255,255,.15);
+  color: #fff;
+  font-size: .8rem;
+  font-weight: 700;
+  padding: .35rem .9rem;
+  border-radius: 999px;
+  margin-bottom: 1rem;
+  letter-spacing: .05em;
+  border: 1px solid rgba(255,255,255,.2);
+}
+
+.hero-title {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.15;
+  margin-bottom: 1.25rem;
+}
+
+.gradient-text {
+  background: linear-gradient(90deg, #a5f3fc, #34d399);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-desc {
+  color: rgba(255,255,255,.85);
+  font-size: 1rem;
+  line-height: 1.75;
+  margin-bottom: 2rem;
+  max-width: 480px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: .75rem;
+  flex-wrap: wrap;
+}
+
+.btn-hero {
+  font-size: 1.05rem;
+  padding: .8rem 1.8rem;
+}
+
+/* Override outline untuk hero background */
+.hero .btn-outline {
+  border-color: rgba(255,255,255,.6);
+  color: #fff;
+}
+.hero .btn-outline:hover {
+  background: rgba(255,255,255,.15);
+  color: #fff;
+}
+
+/* ── Stress Ring Visual ─────────────────────────────────────────── */
+.hero-visual {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 320px;
+}
+
+.stress-ring {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 220px;
+  height: 220px;
+}
+
+.ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,.25);
+  animation: spin linear infinite;
+}
+
+.ring-outer  { width: 220px; height: 220px; animation-duration: 16s; }
+.ring-mid    { width: 165px; height: 165px; animation-duration: 10s; animation-direction: reverse; border-color: rgba(165,243,252,.3); }
+.ring-inner  { width: 110px; height: 110px; animation-duration: 6s;  border-color: rgba(52,211,153,.35); }
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.ring-center {
+  position: relative;
+  z-index: 2;
+  background: rgba(255,255,255,.15);
+  backdrop-filter: blur(8px);
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .2rem;
+}
+
+.ring-emoji { font-size: 1.8rem; }
+.ring-label { font-size: .6rem; color: #fff; font-weight: 700; letter-spacing: .05em; }
+
+/* Float badges */
+.float-badge {
+  position: absolute;
+  font-size: .82rem;
+  font-weight: 700;
+  padding: .35rem .85rem;
+  border-radius: 999px;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(0,0,0,.15);
+  animation: float 3s ease-in-out infinite;
+}
+
+.float-1 { top: 10%; right: 5%;  animation-delay: 0s; }
+.float-2 { bottom: 30%; left: 0%; animation-delay: 1s; }
+.float-3 { bottom: 10%; right: 8%; animation-delay: 2s; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-10px); }
+}
+
+/* Wave SVG */
+.hero-wave {
+  line-height: 0;
+  margin-top: -2px;
+}
+.hero-wave svg { display: block; width: 100%; height: 60px; }
+
+/* ── Sections ───────────────────────────────────────────────────── */
+.section { padding: 4rem 0; }
+.section-alt {
+  padding: 4rem 0;
+  background: linear-gradient(180deg, #e8f0fe 0%, var(--bg) 100%);
+}
+
+.section-title {
+  text-align: center;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 2.5rem;
+}
+
+/* ── Feature Cards ──────────────────────────────────────────────── */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 1.25rem;
+}
+
+.feature-card {
+  text-align: center;
+  padding: 2rem 1.5rem;
+  transition: var(--transition);
+}
+
+.feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.feature-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.feature-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: .5rem;
+}
+
+.feature-desc {
+  font-size: .88rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+/* ── Steps ──────────────────────────────────────────────────────── */
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.5rem;
+  text-align: center;
+}
+
+.step-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .75rem;
+}
+
+.step-num {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(37,99,235,.35);
+}
+
+.step-label {
+  font-size: .9rem;
+  color: var(--text);
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+/* Disclaimer */
+.disclaimer {
+  font-size: .82rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 1rem;
+  background: #fff8e1;
+  border-radius: var(--radius-sm);
+  border: 1px solid #fde68a;
+}
+
+/* ── Responsive ─────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .hero-inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding-top: 2.5rem;
+    padding-bottom: 3rem;
+  }
+  .hero-actions { justify-content: center; }
+  .hero-desc { margin: 0 auto 1.5rem; }
+  .hero-visual { height: 260px; }
+}

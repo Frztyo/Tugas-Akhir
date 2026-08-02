@@ -1,0 +1,39 @@
+# .gitattributes
+# Paksa LF untuk semua file — mencegah CRLF error di server Linux/EC2
+# Tanpa ini, Git Windows konversi LF→CRLF sehingga shell script (.sh) error
+# "bad interpreter: No such file or directory" saat dieksekusi di server
+
+* text=auto eol=lf
+
+# Shell scripts — WAJIB LF (server EC2 Ubuntu tidak bisa baca CRLF)
+*.sh        text eol=lf
+
+# CI/CD Config
+*.yml       text eol=lf
+*.yaml      text eol=lf
+
+# Web source files
+*.js        text eol=lf
+*.jsx       text eol=lf
+*.ts        text eol=lf
+*.tsx       text eol=lf
+*.css       text eol=lf
+*.html      text eol=lf
+*.json      text eol=lf
+*.md        text eol=lf
+
+# Dotfiles
+.gitignore      text eol=lf
+.gitattributes  text eol=lf
+
+# Binary files — jangan disentuh Git
+*.png    binary
+*.jpg    binary
+*.jpeg   binary
+*.gif    binary
+*.ico    binary
+*.svg    binary
+*.woff   binary
+*.woff2  binary
+*.ttf    binary
+*.eot    binary
