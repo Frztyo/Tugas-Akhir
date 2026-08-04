@@ -105,8 +105,10 @@ echo "[$(date '+%H:%M:%S')] [FASE 3] Nginx berhasil direload. (${FASE3_DURATION}
 FASE4_START=$(date +%s)
 echo "[$(date '+%H:%M:%S')] [FASE 4] Menjalankan health check ..." >> $LOG_FILE
 
+set +e
 bash "$SCRIPTS_DIR/healthcheck.sh" >> $LOG_FILE 2>&1
 HEALTH_STATUS=$?
+set -e
 
 FASE4_END=$(date +%s)
 FASE4_DURATION=$((FASE4_END - FASE4_START))
