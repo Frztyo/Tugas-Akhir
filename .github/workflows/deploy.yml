@@ -9,9 +9,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # ────────────────────────────────────────────────────────
       # TAHAP CI: Checkout, Install, Build
-      # ────────────────────────────────────────────────────────
       - name: Checkout kode
         uses: actions/checkout@v4
 
