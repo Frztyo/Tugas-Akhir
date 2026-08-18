@@ -4,7 +4,7 @@
 # Cek: status layanan Nginx + HTTP endpoint response code + response time
 # =============================================================================
 #exit 1 #untuk pegujian rollback
-APP_URL="http://localhost:8080"
+APP_URL="http://localhost"
 MAX_RETRY=5
 RETRY_DELAY=3
 
