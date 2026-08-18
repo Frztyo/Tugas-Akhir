@@ -3,7 +3,7 @@
 # healthcheck.sh — Verifikasi kesehatan aplikasi React yang diserve via Nginx
 # Cek: status layanan Nginx + HTTP endpoint response code + response time
 # =============================================================================
-#exit 1 #untuk pegujian rollback
+exit 1 #untuk pegujian rollback
 APP_URL="http://localhost"
 MAX_RETRY=5
 RETRY_DELAY=3

@@ -42,7 +42,7 @@ export default function Home() {
       <section className="hero">
         <div className="container hero-inner">
           <div className="hero-text fade-up">
-            <div className="hero-chip">🚀 Versi 3 uji healthcheck</div>
+            <div className="hero-chip">🚀 Versi 4 uji rollback</div>
             <h1 className="hero-title">
               Sistem Prediksi<br />
               <span className="gradient-text">Tingkat Stres Mahasiswa</span>
